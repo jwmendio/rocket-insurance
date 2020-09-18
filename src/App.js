@@ -1,25 +1,29 @@
+import { Grid } from '@material-ui/core';
+import { Redirect, Router } from '@reach/router';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import Header from './components/header/Header';
+import QuoteOverview from './pages/quote-overview/QuoteOverview';
+import RatingInformation from './pages/rating-information/RatingInformation';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid container direction="column">
+      <Grid item>
+        <Header />
+      </Grid>
+      <Grid item container>
+        <Grid item xs={false} sm={2} />
+        <Grid item xs={12} sm={8}>
+          <Router>
+            <RatingInformation path="rating-information" />
+            <QuoteOverview path="quote-overview" />
+            <Redirect from="/" to="/rating-information" default noThrow />
+          </Router>
+        </Grid>
+        <Grid item xs={false} sm={2} />
+      </Grid>
+    </Grid>
   );
 }
 
